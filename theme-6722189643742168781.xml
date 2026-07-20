@@ -905,7 +905,7 @@ Skip to main content
 <div class='iklan-ataskomen'>
 <!-- kode Iklan di atas komentar letakkan di sini -->
 <!-- pakai iklan in-feed, sesuaikan data-ad-client dan data-ad-slot -->
-<script async='async' data-cfasync='false' src='https://pl30256672.effectivecpmnetwork.com/dd431883cea26be920dec214e0742a1c/invoke.js'/>
+<!-- effectivecpm script moved to centralized lazy loader in footer -->
 <div id='container-dd431883cea26be920dec214e0742a1c'/>
 
   </div>
@@ -918,7 +918,7 @@ Skip to main content
               <div class='post home-ad'>
 <!-- IKLAN DI BAWAH INI -->
 <!-- pakai iklan responsive, sesuaikan data-ad-client dan data-ad-slot -->
-<script async='async' data-cfasync='false' src='https://pl30256672.effectivecpmnetwork.com/dd431883cea26be920dec214e0742a1c/invoke.js'/>
+<!-- effectivecpm script moved to centralized lazy loader in footer -->
 <div id='container-dd431883cea26be920dec214e0742a1c'/>
 
                 </div>
@@ -929,7 +929,7 @@ Skip to main content
               <div class='post home-ad'>
 <!-- IKLAN DI BAWAH INI -->
 <!-- pakai iklan responsive, sesuaikan data-ad-client dan data-ad-slot -->
-<script async='async' data-cfasync='false' src='https://pl30256672.effectivecpmnetwork.com/dd431883cea26be920dec214e0742a1c/invoke.js'/>
+<!-- effectivecpm script moved to centralized lazy loader in footer -->
 <div id='container-dd431883cea26be920dec214e0742a1c'/>
 
                 </div>
@@ -941,7 +941,7 @@ Skip to main content
 <div class='iklan-bawahpost'>
 <!-- kode Iklan di bawah post letakkan di sini -->
 <!-- pakai iklan in-article, sesuaikan data-ad-client dan data-ad-slot -->
-<script async='async' data-cfasync='false' src='https://pl30256672.effectivecpmnetwork.com/dd431883cea26be920dec214e0742a1c/invoke.js'/>
+<!-- effectivecpm script moved to centralized lazy loader in footer -->
 <div id='container-dd431883cea26be920dec214e0742a1c'/>
 
 </div>
@@ -952,14 +952,14 @@ Skip to main content
     <div class='middleAds middleAds1' id='middleAds1'>
         <!-- iklan di tengah postingan -->
 <!-- pakai iklan in-article, sesuaikan data-ad-client dan data-ad-slot -->
-<script async='async' data-cfasync='false' src='https://pl30256672.effectivecpmnetwork.com/dd431883cea26be920dec214e0742a1c/invoke.js'/>
+<!-- effectivecpm script moved to centralized lazy loader in footer -->
 <div id='container-dd431883cea26be920dec214e0742a1c'/>
 
     </div>
     <div class='middleAds middleAds2' id='middleAds2'>
         <!-- Your middle ads2 here -->
 <!-- pakai iklan in-article, sesuaikan data-ad-client dan data-ad-slot -->
-<script async='async' data-cfasync='false' src='https://pl30256672.effectivecpmnetwork.com/dd431883cea26be920dec214e0742a1c/invoke.js'/>
+<!-- effectivecpm script moved to centralized lazy loader in footer -->
 <div id='container-dd431883cea26be920dec214e0742a1c'/>
 
     </div>
@@ -970,7 +970,7 @@ Skip to main content
 <div class='iklan-bawahpost mb0'>
 <!-- kode Iklan Link di bawah Related post letakkan di sini -->
 <!-- pakai iklan link responsive, sesuaikan data-ad-client dan data-ad-slot atau bisa menggunakan unit matched content -->
-<script async='async' data-cfasync='false' src='https://pl30256672.effectivecpmnetwork.com/dd431883cea26be920dec214e0742a1c/invoke.js'/>
+<!-- effectivecpm script moved to centralized lazy loader in footer -->
 <div id='container-dd431883cea26be920dec214e0742a1c'/>
 
 </div>
@@ -1440,7 +1440,7 @@ this.page.title = &quot;<data:blog.pageName/>&quot;;
   
 <div style='margin-left:15px;margin-bottom:15px'>
 <center>
-<script src='https://pl30256749.effectivecpmnetwork.com/64/6e/af/646eaf4c2c00105a4b064c1be1ba162c.js'/>
+<!-- effectivecpm script moved to centralized lazy loader in footer -->
 
 .</center>
 </div>
@@ -1840,9 +1840,32 @@ this.page.title = &quot;<data:blog.pageName/>&quot;;
 <b:if cond='data:blog.pageType not in {&quot;static_page&quot;,&quot;error_page&quot;} and not data:blog.searchQuery'>
 <!-- Kode ini untuk lazyload adsense dan untuk kode auto ad, silahkan sesuaikan kode google_ad_client -->
 <script>
-<script async='async' data-cfasync='false' src='https://pl30256672.effectivecpmnetwork.com/dd431883cea26be920dec214e0742a1c/invoke.js'/>
-<div id='container-dd431883cea26be920dec214e0742a1c'/>
-
+(function(){
+  var urls = [
+    'https://pl30256672.effectivecpmnetwork.com/dd431883cea26be920dec214e0742a1c/invoke.js',
+    'https://pl30256749.effectivecpmnetwork.com/64/6e/af/646eaf4c2c00105a4b064c1be1ba162c.js'
+  ];
+  var loaded = false;
+  function loadScripts(){
+    if(loaded) return; loaded = true;
+    urls.forEach(function(u){
+      var s = document.createElement('script');
+      s.async = true; s.src = u; document.body.appendChild(s);
+    });
+  }
+  // Load when any ad container becomes visible
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ loadScripts(); obs.disconnect(); } });
+    });
+    var containers = document.querySelectorAll("div[id^='container-dd431883'], div[id^='container-646eaf4c2c']");
+    containers.forEach(function(c){ obs.observe(c); });
+  }
+  // Also load on first user interaction
+  ['scroll','mousemove','touchstart','click'].forEach(function(ev){ window.addEventListener(ev, loadScripts, {once:true,passive:true}); });
+  // Fallback: load after short timeout
+  setTimeout(loadScripts, 5000);
+})();
 </script>
 </b:if>
 <b:if cond='data:blog.pageType not in {&quot;item&quot;}'>
